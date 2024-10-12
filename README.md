@@ -25,7 +25,7 @@ Data loss/deletion – Backups however might be extremely hard in this project w
   
 
 ## Proposed Gantt chart:
-![Gnatt chart]([Images/Screenshot_2024-10-12_164736.png](https://raw.githubusercontent.com/JackWillett03/JackWillett-COMP3000-shop-systems/refs/heads/main/Images/Screenshot%202024-10-12%20164736.png)
+![Gnatt chart](https://raw.githubusercontent.com/JackWillett03/JackWillett-COMP3000-shop-systems/refs/heads/main/Images/Screenshot%202024-10-12%20164736.png)
   
 
 ## Keywords:
