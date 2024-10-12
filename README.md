@@ -25,7 +25,7 @@ Data loss/deletion – Backups however might be extremely hard in this project w
   
 
 ## Proposed Gantt chart:
-![screenshot](Screenshot 2024-10-12 164736.png)
+![Screenshot 2024-10-12 164736.png](Images/Screenshot_2024-10-12_164736.png)
   
 
 ## Keywords:
