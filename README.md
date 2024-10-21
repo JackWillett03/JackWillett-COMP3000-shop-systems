@@ -25,7 +25,7 @@ Test environment – Manual testing
 
 ### Similar projects
 
-![Images/Screenshot_2024-10-19_115137.png](Images/Screenshot_2024-10-19_115137.png)
+![Images/Screenshot_2024-10-19_115137.png](Images/Screenshot 2024-10-19 115137.png)
 
 ### Risk Plan:
 
