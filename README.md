@@ -25,7 +25,7 @@ Test environment – Manual testing
 
 ### Similar projects
 
-![Images/Screenshot_2024-10-19_115137.png](https://raw.githubusercontent.com/JackWillett03/JackWillett-COMP3000-shop-systems/refs/heads/main/Images/Screenshot%202024-10-19%20115137.png?token=GHSAT0AAAAAACYCDBZPI2LFT6QQEMZ7RS3KZYTR7LQ)
+![Images/Screenshot_2024-10-19_115137.png](Images/Screenshot_2024-10-19_115137.png)
 
 ### Risk Plan:
 
