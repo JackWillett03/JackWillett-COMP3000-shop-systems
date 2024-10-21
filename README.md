@@ -9,7 +9,7 @@ https://trello.com/invite/b/670aa2637f28d2a4b832c90b/ATTIebff11846c176bbaf010041
 
 ### Project Vision:  
 
-For shops who want an improved stock management and analysis system as well as improved customer interaction  
+This project is dedicated to shops who want an improved stock management and analysis system as well as improved customer interaction  
 
 The Stock management and analysis system with customer access is a stock management and analysis system that has integrated customer interaction that allows shops to better manage stock with analysis tools suggesting product placement, whether they should increase/decrease stock of items, implement sales and allows customers to view what is currently in stock.  
 
