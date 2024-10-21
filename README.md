@@ -25,7 +25,7 @@ Test environment – Manual testing
 
 ### Similar projects
 
-![Images/Screenshot_2024-10-19_115137.png](Images/Screenshot 2024-10-19 115137.png)
+![image](https://github.com/user-attachments/assets/6dd71624-43d8-4ef1-a356-0b8ef031fcfa)
 
 ### Risk Plan:
 
@@ -38,8 +38,8 @@ Data loss/deletion – Backups however might be extremely hard in this project w
   
 
 ### Proposed Gantt chart:
-![Images/Screenshot_2024-10-12_164736.png](https://raw.githubusercontent.com/JackWillett03/JackWillett-COMP3000-shop-systems/refs/heads/main/Images/Screenshot%202024-10-12%20164736.png?token=GHSAT0AAAAAACYCDBZPZ4RYNRATBH52PIVKZYKT7VQ)
-  
+![image](https://github.com/user-attachments/assets/ff1b3582-6165-4bd6-b42a-20042dbd7a7f)
+
 
 ### Keywords:
 Database, Machine learning, Application, Website, HTML, CSS, JavaScript, Python, Java, SQL, Customer interaction, management. 
