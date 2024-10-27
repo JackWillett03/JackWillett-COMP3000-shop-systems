@@ -29,8 +29,8 @@ Test environment – Manual testing
 
 ### Risk Plan:
 
-![image](![image](https://github.com/user-attachments/assets/b73ab500-6a67-4c0f-baf7-aef6d968320e)
-)
+![image](https://github.com/user-attachments/assets/b73ab500-6a67-4c0f-baf7-aef6d968320e)
+
 
   
 
