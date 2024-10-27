@@ -29,11 +29,8 @@ Test environment – Manual testing
 
 ### Risk Plan:
 
-Unauthorised access to sensitive data (e.g. sales records) - Have data transferred under HTTPS and encrypt data at rest using SQL. 
-Non compliance with data security (e.g. GDPR) - Ensure user data isn’t collected and if it is is only stored as necessary. 
-Weak authentication could allow unauthorised users access – Enforce strong password policies/multi factor authentication. Limit login attempts number, different versions for staff and customers. 
-Bugs and issues could lead to bad user experience – thorough testing must be implemented  
-Data loss/deletion – Backups however might be extremely hard in this project where I most likely won’t have extra places to back up too 
+![image](![image](https://github.com/user-attachments/assets/b73ab500-6a67-4c0f-baf7-aef6d968320e)
+)
 
   
 
