@@ -17,9 +17,9 @@ Currently, from what I could discover supermarkets stock is currently tracked vi
 
 As well as all this, from what I could discover no supermarket inventory management system has extensive integration with customers. This is why I propose the adding of a website/app that allows both the customer to find both the supermarket of their choice via selection and to view the stock of that supermarket and the price so that they don’t waste time going to one that does not have their desired product in stock so that they can compare the prices allowing better competition (comparing the prices can be optional for the supermarket depending on if it wants it). For the AI models I would most likely use a linear regression or random forest model, the linear regression would be more practical, but the random forest is more versatile so useful if unable to get the LR to work, this will take more research and testing when the time comes. 
 
-Programing languages – SQL - databases, C# - handling movement, Python – Machine learning, Java - App, HTML/CSS/JS - Website 
+Programing languages – NoSQL - databases, JS - Linear Regression model, Java - App, HTML/CSS/JS - Website 
 
-Technologies – Computer, Mobile device 
+Technologies – Docker Desktop, Android Studio
 
 Test environment – Manual testing 
 

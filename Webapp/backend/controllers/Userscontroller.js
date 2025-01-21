@@ -1,10 +1,20 @@
 const User = require('../models/Users');
 const bcrypt = require('bcrypt');
+const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_\-+={}\[\]|\\:;'",<>\./?])(?=.*[A-Z])(?=.{8,})/; // at least 8 characters, 1 capital, at least 1 number, and at least 1 symbol for password
 
 // Register new user
 exports.register = async (req, res) => {
     try {
         const { Username, Email, Password } = req.body;
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Check if the email format is valid
+        if (!emailRegex.test(Email)) {
+            return res.status(400).json({ message: 'Invalid email format' });
+        }
+
+        if (!passwordRegex.test(Password)) { // Check the password is valid
+            return res.status(400).json({ message: 'Password must be at least 8 characters long, have a capital, contain at least one number and one symbol' });
+        }
 
         // Check if the username or email already exists
         const existingUsername = await User.findOne({
@@ -85,6 +95,15 @@ exports.updateUser = async (req, res) => {
     try {
         const { username } = req.params; // Get username from the URL
         const { Email, Password } = req.body; // Get email and password
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Check if the email format is valid
+        if (Email && !emailRegex.test(Email)) {
+            return res.status(400).json({ message: 'Invalid email format' });
+        }
+
+        if (!passwordRegex.test(Password)) { // Check the password is valid
+            return res.status(400).json({ message: 'Password must be at least 8 characters long, have a capital, contain at least one number and one symbol' });
+        }
 
         // Check if the user exists
         const user = await User.findOne({ Username: { $regex: new RegExp('^' + username + '$', 'i') } });

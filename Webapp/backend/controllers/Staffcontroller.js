@@ -1,10 +1,16 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const StaffLogins = require('../models/Staff');
+const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_\-+={}\[\]|\\:;'",<>\./?])(?=.*[A-Z])(?=.{8,})/; // at least 8 characters, 1 capital, at least 1 number, and at least 1 symbol for password
 
 exports.addStaff = async (req, res) => { // Add new staff
     try {
         const { Username, Password, ShopId, IsManager, IsOwner } = req.body;
+
+        if (!passwordRegex.test(Password)) { // Check password
+            return res.status(400).json({ message: 'Password must be at least 8 characters long, have a capital, contain at least one number and one symbol' });
+        }
 
         let shopObjectId = null;
         if (ShopId) {
@@ -25,6 +31,37 @@ exports.addStaff = async (req, res) => { // Add new staff
 
         await newStaff.save(); // Save it to the database
         res.status(200).json(newStaff);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+exports.login = async (req, res) => { // Login
+    try {
+        const { Username, Password } = req.body;
+
+        // Find the staff by username
+        const staff = await StaffLogins.findOne({ Username });
+        if (!staff) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Compare the password
+        const isMatch = await bcrypt.compare(Password, staff.Password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        // Create the JWT token
+        const payload = {
+            id: staff._id,
+            isManager: staff.IsManager,
+            isOwner: staff.IsOwner,
+        };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -61,7 +98,7 @@ exports.getStaffByIsManager = async (req, res) => { // Get staff if they're a ma
         const staff = await StaffLogins.find({ IsManager: isManager });
 
         if (!staff || staff.length === 0) {
-            return res.status(404).json({ message: 'No staff found with the given manager status' });
+            return res.status(404).json({ message: 'No staff found with the manager role' });
         }
         res.status(200).json(staff);
     } catch (error) {
@@ -69,9 +106,30 @@ exports.getStaffByIsManager = async (req, res) => { // Get staff if they're a ma
     }
 };
 
+exports.getStaffById = async (req, res) => { // Get staff by Id
+    try {
+        const { id } = req.params; // Get the Id
+
+        const staff = await StaffLogins.findById(id); // Find the staff member by their Id
+        
+        if (!staff) {
+            return res.status(404).json({ message: 'Staff not found' });
+        }
+        
+        res.status(200).json(staff);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
 exports.updateStaff = async (req, res) => { // Update staff by Id
     try {
         const { Username, Password, ShopId, IsManager, IsOwner } = req.body;
+
+        if (!passwordRegex.test(Password)) { // Check password
+            return res.status(400).json({ message: 'Password must be at least 8 characters long, have a capital, contain at least one number and one symbol' });
+        }
 
         let shopObjectId = null;
         if (ShopId) {
