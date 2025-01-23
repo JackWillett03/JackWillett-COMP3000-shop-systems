@@ -1,15 +1,19 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ShopList from './ShopList';
+import Login from "./Login";
+import Register from "./Register";
 
 const App = () => {
-
-
   return (
-    <Router> {/* Enable, define and render the routes */}
+    <Router>
       <Routes>
+        <Route path="/" element={<ShopList />} /> {/* Default page is the shops one */}
+        <Route path="/login" element={<Login />} /> {/* Login page */}
+        <Route path="/register" element={<Register />} /> {/* Registeration page */}
       </Routes>
     </Router>
   );
 };
 
-export default App; // Export so can be used elsewhere
+export default App;

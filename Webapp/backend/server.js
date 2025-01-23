@@ -22,7 +22,9 @@ mongoose
   .catch((err) => console.error('MongoDB connection error:', err));
 
 app.use(express.json());
-app.use(cors());
+
+app.use(cors);
+
 
 // Route handlers
 app.use('/shops', ShopListroute);
