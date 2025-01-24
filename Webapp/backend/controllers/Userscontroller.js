@@ -1,6 +1,7 @@
 const User = require('../models/Users');
 const bcrypt = require('bcrypt');
 const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_\-+={}\[\]|\\:;'",<>\./?])(?=.*[A-Z])(?=.{8,})/; // at least 8 characters, 1 capital, at least 1 number, and at least 1 symbol for password
+const jwt = require('jsonwebtoken');
 
 // Register new user
 exports.register = async (req, res) => {
@@ -65,8 +66,9 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ message: 'Invalid login' });
         }
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h'}); // Creates JWT Token
 
-        res.status(200).json({ message: 'Login successful' });
+        res.status(200).json({token});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

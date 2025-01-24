@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css"
 
 const Login = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({ Username: "", Password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:82/users/login", {
+      const response = await fetch("http://localhost:82/users/login", { // POST request to users route
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -27,38 +27,49 @@ const Login = () => {
 
       if (response.ok) { // Successfully logged in
         if (result.token) {
-          localStorage.setItem("username", formData.username); // Store username
+          localStorage.setItem("username", formData.Username); // Store username
           localStorage.setItem("token", result.token); // Store JWT token
+          alert(`Logged in as ${formData.Username}`); 
           navigate("/"); // Navigate to ShopList page
         } else {
-          setError("Login failed, no token received.");
+          setError("Login failed, no token, try again.");
         }
       } else {
-        setError(result.message || "Login failed, please check your details.");
+        setError(result.message || "Login failed, please check your username and password.");
       }
     } catch (err) {
       setError("An error occurred while logging in.");
     }
   };
 
+  const handleBack = () => { // Takes you back to the shoplist page
+    navigate("/");
+  };
+
   return (
     <div className="login-container">
+      <div className="header">
+        {/* Back button to go to film */}
+        <button onClick={handleBack} className="backbutton">
+          Back to main page
+        </button>
+      </div>
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
-        {error && <p className="error">{error}</p>}
+          {error && <p className="error">{error}</p>}
         <input
           type="text"
-          name="username"
+          name="Username"
           placeholder="Username"
-          value={formData.username}
+          value={formData.Username}
           onChange={handleChange}
           required
         />
         <input
           type="password"
-          name="password"
+          name="Password"
           placeholder="Password"
-          value={formData.password}
+          value={formData.Password}
           onChange={handleChange}
           required
         />

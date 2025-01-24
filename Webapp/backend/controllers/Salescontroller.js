@@ -211,7 +211,7 @@ exports.updateSalesPrediction = async (req, res) => {
         ].filter(value => value > 0); // Ignore the 0's
 
         if (salesData.length < 3) {
-            return res.status(400).json({ message: 'Not enough data to predict sales you must have at least 2 months data without 0s' });
+            return res.status(400).json({ message: 'Not enough data to predict sales you must have at least 3 months of data without 0s' });
         }
 
         // Prepare the series (e.g. 1 to 5 months) based on the filtered data (won't be 14 months if 9 are 0s)
