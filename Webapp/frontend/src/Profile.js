@@ -37,6 +37,40 @@ const Profile = () => {
     fetchUserData();
   }, [navigate]); // Makes it rerun on navigate
 
+  useEffect(() => { // Check if user is logged in
+      const token = localStorage.getItem("token"); // Get the JWT from storage
+      const username = localStorage.getItem("username"); // Get the username from storage
+  
+      if (token && username) {
+        const decodedToken = parseJwt(token); // Decode the JWT
+        const currentTime = Math.floor(Date.now() / 1000); // Get the current time in seconds
+  
+        // Check if token is still valid
+        if (decodedToken && decodedToken.exp > currentTime) {
+          setIsLoggedIn(true);
+        } 
+        else { // If JWT has expired log the user out
+          localStorage.removeItem("token");
+          localStorage.removeItem("username");
+          alert("Session expired. You have been logged out.");
+          navigate("/"); // Go to the main page
+          setIsLoggedIn(false);
+        }
+      }
+    }, []);
+  
+    const parseJwt = (token) => { // Decodes JWT
+      try {
+        const base64Url = token.split(".")[1]; // Extract payload
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/"); // Fix base64 format
+        return JSON.parse(atob(base64)); // Decond and parse payload
+      } 
+      catch (e) {
+        return null;
+      }
+    };
+  
+
   const handleBack = () => { // Go back to the page you were last on
     const back = localStorage.getItem("page");
     navigate(back);
