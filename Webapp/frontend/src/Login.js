@@ -43,15 +43,16 @@ const Login = () => {
   };
 
   const handleBack = () => { // Takes you back to the shoplist page
-    navigate("/");
+    const back = localStorage.getItem("page")
+    navigate(back);
   };
 
   return (
     <div className="login-container">
       <div className="header">
-        {/* Back button to go to film */}
+        {/* Back button to go to Shop */}
         <button onClick={handleBack} className="backbutton">
-          Back to main page
+          Back
         </button>
       </div>
       <form className="login-form" onSubmit={handleSubmit}>

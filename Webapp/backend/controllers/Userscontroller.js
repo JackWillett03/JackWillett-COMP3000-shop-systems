@@ -96,25 +96,34 @@ exports.getUserByUsername = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
         const { username } = req.params; // Get username from the URL
-        const { Email, Password } = req.body; // Get email and password
+        const { Email, Password, CurrentPassword } = req.body; // Get email, new password, and current password
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Check if the email format is valid
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Check if the email is in the correct format
         if (Email && !emailRegex.test(Email)) {
             return res.status(400).json({ message: 'Invalid email format' });
         }
 
-        if (!passwordRegex.test(Password)) { // Check the password is valid
+        // Make sure the password has all the parts it needs
+        if (Password && !passwordRegex.test(Password)) {
             return res.status(400).json({ message: 'Password must be at least 8 characters long, have a capital, contain at least one number and one symbol' });
         }
 
-        // Check if the user exists
+        // Check the user exists
         const user = await User.findOne({ Username: { $regex: new RegExp('^' + username + '$', 'i') } });
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Check if the new email exists
+        // Check the passwords match
+        if (CurrentPassword) {
+            const isMatch = await bcrypt.compare(CurrentPassword, user.Password); // Compare current password with the hashed one in the database
+            if (!isMatch) {
+                return res.status(401).json({ message: 'Current password is incorrect' });
+            }
+        }
+
+        // Check if the email exists
         if (Email) {
             const existingEmail = await User.findOne({ Email });
             if (existingEmail && existingEmail.Username !== user.Username) {
@@ -122,7 +131,6 @@ exports.updateUser = async (req, res) => {
             }
         }
 
-        // Prepare update data
         let updateData = {};
 
         if (Email) {
@@ -134,35 +142,33 @@ exports.updateUser = async (req, res) => {
             updateData.Password = await bcrypt.hash(Password, salt); // Hash the password
         }
 
+        // Update the user
         const updatedUser = await User.findOneAndUpdate(
             { Username: user.Username }, // Use the original username
             updateData,
-            { new: true } // Return the updated user
+            { new: true }
         );
 
-        // Return the updated data
-        res.status(200).json(updatedUser); // Return the updated user
+        res.status(200).json(updatedUser);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-
-
 // Delete a user by username
 exports.deleteUser = async (req, res) => {
     try {
-        const { Username } = req.params;
+        const { username } = req.params;  // Takes the username from the route
 
-        const userToDelete = await User.findOne({ Username });
+        const userToDelete = await User.findOne({ Username: username }); // Find the username
         if (!userToDelete) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        await User.deleteOne({ Username });
-
+        await User.deleteOne({ Username: username }); // Delete user by username
         res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: error.message });
     }
 };

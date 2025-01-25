@@ -74,6 +74,7 @@ const ShopList = () => {
       alert("You have been logged out."); // Tell the user they have logged out
     } 
     else {
+      localStorage.setItem("page", window.location.pathname);
       navigate("/login"); // Go to the login page
     }
   };
@@ -114,6 +115,11 @@ const ShopList = () => {
                 {isLoggedIn ? "Logout" : "Login"} {/* Text changes based on if user is logged in or out */}
               </button>
             </li>
+            {isLoggedIn && (
+            <li>
+              <button onClick={() => navigate("/profile")}>Profile</button> {/* Navigate to Profile page */}
+            </li>
+            )}
           </ul>
         </div>
       )}
