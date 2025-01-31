@@ -64,6 +64,11 @@ const ShopList = () => {
     setSearchTerm(e.target.value); // Update the search term with the input
   };
 
+  const handleCardClick = (shopId) => {
+    navigate(`/stocklist/${shopId}`); // Go to the StockList page for the sepcific shopId
+  };
+  
+
   const handleLoginLogout = (e) => { // Handle the login/out button
     e.preventDefault(); // Prevent forms default behaviour
     if (isLoggedIn) {
@@ -111,14 +116,21 @@ const ShopList = () => {
         <div className="menu" onClick={(e) => e.stopPropagation()}>
           <ul>
             <li>
-              <button onClick={handleLoginLogout} style={{ color: isLoggedIn ? "red" : "blue" }}> {/* Red if logged in blue if not */}
-                {isLoggedIn ? "Logout" : "Login"} {/* Text changes based on if user is logged in or out */}
+              <button onClick={handleLoginLogout} style={{ color: isLoggedIn ? "red" : "blue" }}>
+                {isLoggedIn ? "Logout" : "Login"}
               </button>
             </li>
+            {!isLoggedIn && (
+              <>
+                <li>
+                  <button onClick={() => navigate("/staffLogin")}>Staff Login</button>
+                </li>
+              </>
+            )}
             {isLoggedIn && (
-            <li>
-              <button onClick={() => navigate("/profile")}>Profile</button> {/* Navigate to Profile page */}
-            </li>
+              <li>
+                <button onClick={() => navigate("/profile")}>Profile</button>
+              </li>
             )}
           </ul>
         </div>
@@ -134,19 +146,25 @@ const ShopList = () => {
         />
       </div>
 
-      {/* Shops Grid */}
+      {/* Shops Grid with clickable cards */}
       <div className="shopsgrid">
         {filteredShops.length === 0 ? (
           <p>No shops found.</p>
         ) : (
           filteredShops.map((shop) => (
-            <div key={shop._id} className="shopcard">
+            <div
+              key={shop._id}
+              className="shopcard"
+              onClick={() => handleCardClick(shop._id)}
+              style={{ cursor: "pointer" }}
+            >
               <h2>{shop.Name}</h2>
               <p>{shop.Location}</p>
             </div>
           ))
         )}
       </div>
+
 
       {/* Login/Logout Button */}
       <button

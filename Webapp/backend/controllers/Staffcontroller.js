@@ -55,6 +55,7 @@ exports.login = async (req, res) => { // Login
         // Create the JWT token
         const payload = {
             id: staff._id,
+            ShopId: staff.ShopId,
             isManager: staff.IsManager,
             isOwner: staff.IsOwner,
         };

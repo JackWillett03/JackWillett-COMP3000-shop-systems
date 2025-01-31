@@ -12,6 +12,7 @@ const Profile = () => {
   const [isUpdatingEmail, setIsUpdatingEmail] = useState(false); // Toggle the Update Email input boxes
   const [isUpdatingPassword, setIsUpdatingPassword] = useState(false); // Toggle the Update PAssword input boxes
   const [confirmDelete, setConfirmDelete] = useState(false); // Toggle delete account conformation form
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => { // Gets data when the page is loaded
@@ -38,38 +39,38 @@ const Profile = () => {
   }, [navigate]); // Makes it rerun on navigate
 
   useEffect(() => { // Check if user is logged in
-      const token = localStorage.getItem("token"); // Get the JWT from storage
-      const username = localStorage.getItem("username"); // Get the username from storage
-  
-      if (token && username) {
-        const decodedToken = parseJwt(token); // Decode the JWT
-        const currentTime = Math.floor(Date.now() / 1000); // Get the current time in seconds
-  
-        // Check if token is still valid
-        if (decodedToken && decodedToken.exp > currentTime) {
-          setIsLoggedIn(true);
-        } 
-        else { // If JWT has expired log the user out
-          localStorage.removeItem("token");
-          localStorage.removeItem("username");
-          alert("Session expired. You have been logged out.");
-          navigate("/"); // Go to the main page
-          setIsLoggedIn(false);
-        }
+    const token = localStorage.getItem("token"); // Get the JWT from storage
+    const username = localStorage.getItem("username"); // Get the username from storage
+
+    if (token && username) {
+      const decodedToken = parseJwt(token); // Decode the JWT
+      const currentTime = Math.floor(Date.now() / 1000); // Get the current time in seconds
+
+      // Check if token is still valid
+      if (decodedToken && decodedToken.exp > currentTime) {
+        setIsLoggedIn(true); // User is logged in
+      } else { // If JWT has expired log the user out
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        alert("Session expired. You have been logged out.");
+        navigate("/"); // Go to the main page
+        setIsLoggedIn(false); // User is logged out
       }
-    }, []);
-  
-    const parseJwt = (token) => { // Decodes JWT
-      try {
-        const base64Url = token.split(".")[1]; // Extract payload
-        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/"); // Fix base64 format
-        return JSON.parse(atob(base64)); // Decond and parse payload
-      } 
-      catch (e) {
-        return null;
-      }
-    };
-  
+    } else {
+      setIsLoggedIn(false); // If no token, user is not logged in
+      navigate("/login"); // Go to login page
+    }
+  }, [navigate]); // Runs once on component load
+
+  const parseJwt = (token) => { // Decodes JWT
+    try {
+      const base64Url = token.split(".")[1]; // Extract payload
+      const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/"); // Fix base64 format
+      return JSON.parse(atob(base64)); // Decode and parse payload
+    } catch (e) {
+      return null;
+    }
+  };
 
   const handleBack = () => { // Go back to the page you were last on
     const back = localStorage.getItem("page");
@@ -83,22 +84,22 @@ const Profile = () => {
       return;
     }
 
-    const username = localStorage.getItem("username"); // Get the username fron storage
+    const username = localStorage.getItem("username"); // Get the username from storage
     const response = await fetch(`http://localhost:82/users/username/${username}`, { // PUT request
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ Email: newEmail, Password: currentPassword }),
+      body: JSON.stringify({ Email: newEmail, Password: currentPassword }), // Send email and password
     });
 
     const result = await response.json();
     if (response.ok) {
-      setUserData((prevData) => ({ ...prevData, Email: newEmail })); // Update user data
+      setUserData((prevData) => ({ ...prevData, Email: newEmail })); // Update user data state
       setNewEmail(""); // Clear input
-      setCurrentPassword("");
-      setIsUpdatingEmail(false); // Hide the form
-      setErrorMessage(""); // Clear errors
+      setCurrentPassword(""); // Clear input
+      setIsUpdatingEmail(false); // Hide the email update form
+      setErrorMessage(""); // Clear error message
     } else {
       setErrorMessage(result.message);
     }

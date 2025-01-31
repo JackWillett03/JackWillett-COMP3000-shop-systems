@@ -1,10 +1,8 @@
-// This page is largely taken from a previous project I did, there are some minor differences
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css"
+import "./Login.css"; // Same look as Login so use that
 
-const Login = () => {
+const StaffLogin = () => {
   const [formData, setFormData] = useState({ Username: "", Password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -17,7 +15,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:82/users/login", { // POST request to users route
+      const response = await fetch("http://localhost:82/staff/login", { // POST request
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -27,37 +25,37 @@ const Login = () => {
 
       if (response.ok) { // Successfully logged in
         if (result.token) {
-          localStorage.setItem("username", formData.Username); // Store username
+          localStorage.setItem("staffUsername", formData.Username); // Store staff username
           localStorage.setItem("token", result.token); // Store JWT token
-          alert(`Logged in as ${formData.Username}`); 
-          navigate("/"); // Navigate back to previous page
+          alert(`Logged in as Staff: ${formData.Username}`);
+          navigate("/staffsl"); // Go to staff shop page
         } else {
-          setError("Login failed, no token, try again.");
+          setError("Login failed, no token received.");
         }
       } else {
-        setError(result.message || "Login failed, please check your username and password.");
+        setError(result.message || "Invalid username or password.");
       }
     } catch (err) {
       setError("An error occurred while logging in.");
     }
   };
 
-  const handleBack = () => { // Takes you back to the shoplist page
-    const back = localStorage.getItem("page")
-    navigate(back);
+  const handleBack = () => { // Go to shop page
+    navigate("/");
   };
 
   return (
     <div className="login-container">
       <div className="header">
-        {/* Back button to go to Shop */}
+        {/* Back button to go to the shop page */}
         <button onClick={handleBack} className="backbutton">
           Home
         </button>
       </div>
+      {/* Login form */}
       <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-          {error && <p className="error">{error}</p>}
+        <h2>Staff Login</h2>
+        {error && <p className="error">{error}</p>}
         <input
           type="text"
           name="Username"
@@ -75,15 +73,9 @@ const Login = () => {
           required
         />
         <button type="submit">Login</button>
-        <p>
-          Don't have an account?{" "}
-          <button onClick={() => navigate("/register")} className="link">
-            Register
-          </button>
-        </p>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default StaffLogin;
