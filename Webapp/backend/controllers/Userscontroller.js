@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*()_\-+={}\[\]|\\:;'",<>\./?])(?=.*[A-Z])(?=.{8,})/; // at least 8 characters, 1 capital, at least 1 number, and at least 1 symbol for password
 const jwt = require('jsonwebtoken');
 
-// Register new user
+// Register new user (mostly taken from a previous project)
 exports.register = async (req, res) => {
     try {
         const { Username, Email, Password } = req.body;
@@ -50,7 +50,7 @@ exports.register = async (req, res) => {
     }
 };
 
-// User login
+// User login (mostly taken from a previous project)
 exports.login = async (req, res) => {
     try {
         const { Username, Password } = req.body;
@@ -74,7 +74,7 @@ exports.login = async (req, res) => {
     }
 };
 
-// Get a user by username
+// Get a user by username 
 exports.getUserByUsername = async (req, res) => {
     try {
         const { username } = req.params;

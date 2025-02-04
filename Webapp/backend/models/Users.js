@@ -1,3 +1,4 @@
+// (mostly taken from a previous project)
 const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({

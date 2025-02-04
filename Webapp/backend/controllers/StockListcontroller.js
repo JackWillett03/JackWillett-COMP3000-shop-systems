@@ -51,7 +51,7 @@ exports.getStockByShopId = async (req, res) => { // Get stock by ShopId
         const stocks = await StockList.find({ ShopId: shopObjectId });
 
         if (!stocks || stocks.length === 0) {
-            return res.status(404).json({ message: 'No stocks found for the given ShopId' });
+            return [];
         }
         res.status(200).json(stocks);
     } catch (error) {

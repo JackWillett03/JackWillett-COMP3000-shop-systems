@@ -9,6 +9,8 @@ import Staff from "./StaffLogin";
 import StaffSL from "./StaffShopList";
 import StaffStockList from "./StaffStockList";
 import OwnerStockList from "./OwnerStockList";
+import OwnerSales from "./OwnerSales.js";
+import Sales from "./Sales";
 
 const App = () => {
   return (
@@ -23,6 +25,8 @@ const App = () => {
         <Route path="/staffsl" element={<StaffSL />} /> {/* Staffs shoplist page */}
         <Route path="/staffstocklist/:shopId" element={<StaffStockList />} /> {/* Staffs stocklist page */}
         <Route path="/ownerstocklist" element={<OwnerStockList />} /> {/* Owners shoplist page */}
+        <Route path="/ownersales" element={<OwnerSales />} /> {/* Owners sales page */}
+        <Route path="/sales/:stockId" element={<Sales />} /> {/* Sales page */}
       </Routes>
     </Router>
   );

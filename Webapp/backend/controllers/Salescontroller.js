@@ -67,7 +67,7 @@ exports.getSalesByStockId = async (req, res) => { // Get sales by StockId
         const sales = await Sales.find({ StockId: stockObjectId });
 
         if (!sales || sales.length === 0) {
-            return res.status(404).json({ message: 'Sales not found for the StockId' });
+            [];
         }
         
         res.status(200).json(sales);
@@ -204,10 +204,10 @@ exports.updateSalesPrediction = async (req, res) => {
 
         // Get the sales data for the last 14 months (ignores 0's)
         const salesData = [
-            sales.OneMonthAgo, sales.TwoMonthsAgo, sales.ThreeMonthsAgo, sales.FourMonthsAgo,
-            sales.FiveMonthsAgo, sales.SixMonthsAgo, sales.SevenMonthsAgo, sales.EightMonthsAgo,
-            sales.NineMonthsAgo, sales.TenMonthsAgo, sales.ElevenMonthsAgo, sales.TwelveMonthsAgo,
-            sales.ThirteenMonthsAgo, sales.FourteenMonthsAgo
+            sales.FourteenMonthsAgo, sales.ThirteenMonthsAgo, sales.TwelveMonthsAgo, sales.ElevenMonthsAgo,
+            sales.TenMonthsAgo, sales.NineMonthsAgo, sales.EightMonthsAgo, sales.SevenMonthsAgo,
+            sales.SixMonthsAgo, sales.FiveMonthsAgo, sales.FourMonthsAgo, sales.ThreeMonthsAgo,
+            sales.TwoMonthsAgo, sales.OneMonthAgo
         ].filter(value => value > 0); // Ignore the 0's
 
         if (salesData.length < 3) {

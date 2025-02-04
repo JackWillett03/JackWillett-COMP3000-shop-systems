@@ -207,10 +207,15 @@ const StaffShopList = () => {
                 </button>
                 </li>
                 {isOwner && (
-                    <li>
-                        <button onClick={() => navigate("/ownerstocklist")}>All Stocks</button>
-                    </li>
-                )}
+                <>
+                  <li>
+                    <button onClick={() => navigate("/ownerstocklist")}>All Stocks</button>
+                  </li>
+                  <li>
+                    <button onClick={() => navigate("/ownersales")}>All Sales</button>
+                  </li>
+                </>
+              )}
             </ul>
             </div>
         )}

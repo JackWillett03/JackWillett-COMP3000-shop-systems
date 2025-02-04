@@ -4,41 +4,59 @@ import "./StockList.css";
 
 const StockList = () => {
   const [stocks, setStocks] = useState([]); // Store stocks
+  const [shops, setShops] = useState([]); // Store shops
   const [searchTerm, setSearchTerm] = useState(""); // Store search
   const [error, setError] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Dropdown menu
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track if user is logged in
   const navigate = useNavigate();
 
-  // Get stock data when the page loads
+  // Get stock and shop data when the page loads
   useEffect(() => {
-    const fetchStocks = async () => {
+    const fetchStocksAndShops = async () => {
       try {
         const token = localStorage.getItem("token"); // Get the JWT
         if (!token) {
-          setIsLoggedIn(false); // If theres no JWT log out
+          setIsLoggedIn(false); // If there's no JWT log out
           navigate("/"); // Go to the Shop page
           return;
         }
 
-        const response = await fetch("http://localhost:82/stocks", { // GET Request
+        // Fetch stocks
+        const stockResponse = await fetch("http://localhost:82/stocks", { // GET Request for stock
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        if (!response.ok) {
+        if (!stockResponse.ok) {
           throw new Error("Failed to fetch stock data.");
         }
-        const data = await response.json();
-        setStocks(data);
+
+        const stockData = await stockResponse.json();
+        setStocks(stockData);
+
+        // Fetch shops
+        const shopResponse = await fetch("http://localhost:82/shops", { // GET Request for shops
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!shopResponse.ok) {
+          throw new Error("Failed to fetch shop data.");
+        }
+
+        const shopData = await shopResponse.json();
+        setShops(shopData);
       } catch (err) {
         setError(err.message);
       }
     };
 
-    fetchStocks();
+    fetchStocksAndShops();
   }, []);
 
   // Make sure the user is logged in and JWT valid
@@ -92,6 +110,11 @@ const StockList = () => {
     setIsLoggedIn(false);
     alert("You have been logged out.");
     navigate("/"); // Go to Shop page after logging out
+  };
+
+  // Find shop details by ShopId
+  const getShopDetails = (shopId) => {
+    return shops.find((shop) => shop._id === shopId) || { Name: "Unknown", Location: "Unknown" };
   };
 
   // Filter stocks based on search bar
@@ -149,14 +172,23 @@ const StockList = () => {
         {filteredStocks.length === 0 ? (
           <p>No stock found.</p>
         ) : (
-          filteredStocks.map((stock) => (
-            <div key={stock._id} className="shopcard">
-              <h2>{stock.Item}</h2>
-              <p>Price: £{stock.Price}</p>
-              <p>Stock: {stock.CurrentStock}</p>
-              <p>Tags: {stock.Tags.join(", ")}</p>
-            </div>
-          ))
+          filteredStocks.map((stock) => {
+            const shopDetails = getShopDetails(stock.ShopId);
+            return (
+              <div key={stock._id} className="shopcard"> 
+                {/* StockList data */}
+                <h2>{stock.Item}</h2>
+                <p>Price: £{stock.Price}</p>
+                <p>Stock: {stock.CurrentStock}</p>
+                <p>Tags: {stock.Tags.join(", ")}</p>
+                <hr />
+                {/* ShopList data so you know which belongs to which shop */}
+                <p><strong>Shop ID:</strong> {stock.ShopId}</p>
+                <p><strong>Shop Name:</strong> {shopDetails.Name}</p>
+                <p><strong>Location:</strong> {shopDetails.Location}</p>
+              </div>
+            );
+          })
         )}
       </div>
 

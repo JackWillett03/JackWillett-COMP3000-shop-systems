@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const http = require('http');
+const http = require('http'); 
 const ShopListroute = require('./route/ShopListroute');
 const StockListroute = require('./route/StockListroute');
 const Salesroute = require('./route/Salesroute');
@@ -23,8 +23,7 @@ mongoose
 
 app.use(express.json());
 
-app.use(cors());
-
+app.use(cors())
 
 // Route handlers
 app.use('/shops', ShopListroute);
