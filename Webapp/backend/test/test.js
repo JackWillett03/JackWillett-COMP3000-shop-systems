@@ -10,6 +10,7 @@ const Staff = require('../models/Staff');
 const ShopList = require('../models/ShopList');
 const StockList = require('../models/StockList');
 const Sales = require('../models/Sales');
+const User = require('../models/Users');
 chai.use(chaiHttp);
 
 // Tests to make sure the API is running and can be accessed
@@ -425,4 +426,3 @@ describe('StockList tests', () => {
             });
     });
 });
-

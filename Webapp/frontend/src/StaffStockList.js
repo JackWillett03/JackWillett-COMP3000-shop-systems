@@ -86,6 +86,11 @@ const StaffStockList = () => {
     navigate("/"); // Go to ShopList page
   };
 
+  // Adding staff
+  const handleStaff = () => {
+    navigate(`/staffmanagement/${shopId}`); // Go to Staff page
+  };
+
   // Got to the sales page based on specific StockId
   const handleCardClick = (stockId) => {
     localStorage.setItem("page", window.location.pathname); // Set this page to local storage to be used for sales
@@ -256,6 +261,13 @@ const StaffStockList = () => {
                 Staff Logout
               </button>
             </li>
+            {(isOwner || isManager) && (
+            <li>
+              <button onClick={handleStaff} style={{ color: "#007bff" }}>
+                Add Staff
+              </button>
+            </li>
+          )}
           </ul>
         </div>
       )}
