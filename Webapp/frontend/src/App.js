@@ -11,6 +11,7 @@ import StaffStockList from "./StaffStockList";
 import OwnerStockList from "./OwnerStockList";
 import OwnerSales from "./OwnerSales.js";
 import Sales from "./Sales";
+import StaffManagement from "./StaffManagement";
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/ownerstocklist" element={<OwnerStockList />} /> {/* Owners shoplist page */}
         <Route path="/ownersales" element={<OwnerSales />} /> {/* Owners sales page */}
         <Route path="/sales/:stockId" element={<Sales />} /> {/* Sales page */}
+        <Route path="/staffmanagement/:shopId" element={<StaffManagement />} /> {/* Add staff page */}
       </Routes>
     </Router>
   );
