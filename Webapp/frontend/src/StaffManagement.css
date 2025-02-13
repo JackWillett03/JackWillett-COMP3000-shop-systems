@@ -42,7 +42,7 @@
     margin: 5px 0;
 }
 
-.deletebutton {
+.deletebuttons {
     background-color: #d9534f; /* Red color */
     color: white;
     padding: 8px 12px;
@@ -52,7 +52,7 @@
     margin-top: 10px;
 }
 
-.deletebutton:hover {
+.deletebuttons:hover {
     background-color: #c9302c;
 }
 

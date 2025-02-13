@@ -52,7 +52,7 @@ const Login = () => {
       <div className="header">
         {/* Back button to go to Shop */}
         <button onClick={handleBack} className="backbutton">
-          Home
+          Back
         </button>
       </div>
       <form className="login-form" onSubmit={handleSubmit}>

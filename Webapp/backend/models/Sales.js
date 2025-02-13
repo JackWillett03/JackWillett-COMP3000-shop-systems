@@ -4,7 +4,7 @@ const SalesSchema = new mongoose.Schema({
   StockId: { type: mongoose.Schema.Types.ObjectId, ref: 'StockList', required: true, },
   ShopId: { type: mongoose.Schema.Types.ObjectId, ref: 'ShopList', required: true },
   Item: { type: String, required: true, trim: true }, 
-  Placement: { type: String, enum: ["front", "middle", "back"], default: "middle" }, 
+  Placement: { type: String, enum: ["Front", "Middle", "Back"], default: "Middle" }, 
   PredictedNextMonthSales: { type: Number, default: 0 },
   OneMonthAgo: { type: Number, default: 0, },
   TwoMonthsAgo: { type: Number, default: 0, },

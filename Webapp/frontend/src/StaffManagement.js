@@ -202,7 +202,7 @@ const StaffManagement = () => {
                     {/* Delete Button */}
                     {isOwner || isManager ? (
                       <button
-                        className="deletebutton"
+                        className="deletebuttons"
                         onClick={() => handleDeleteStaff(staffMember._id)}
                       >
                         Delete
