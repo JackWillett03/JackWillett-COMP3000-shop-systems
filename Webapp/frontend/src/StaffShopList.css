@@ -103,9 +103,8 @@
   }
   
   .updateshop input {
-    padding: 5px;
-    font-size: 14px;
-    width: 100%;
+    width: calc(100% - 10px);
+    box-sizing: border-box;
   }
   
   .updateshop button {
