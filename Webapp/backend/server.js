@@ -15,7 +15,7 @@ const server = http.createServer(app);
 dotenv.config(); // Load environment variables
 
 // MongoDB connection
-const mongoURL = 'mongodb://host.docker.internal:27017/appdb'; // Connection string
+const mongoURL = process.env.CONNECTION; // Connection string
 mongoose
   .connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB successfully'))
