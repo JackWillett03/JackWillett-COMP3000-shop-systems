@@ -4,7 +4,7 @@ const StockListSchema = new mongoose.Schema({
   ShopId: { type: mongoose.Schema.Types.ObjectId, ref: 'ShopList', required: true, },
   Item: { type: String, required: true, trim: true, },
   CurrentStock: { type: Number, required: true, default: 0, },
-  Price: { type: Number, required: true, },
+  Price: { type: String, required: true, },
   Tags: { type: [String], default: [], },
 });
 
