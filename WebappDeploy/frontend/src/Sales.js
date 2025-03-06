@@ -226,7 +226,7 @@ const Sales = () => {
 
     // Setting the sales data
     const chartData = sales.map(sale => ({
-        name: sale.Item,
+        name: sale.Item,  // Item name for the X-axis
         "One Month Ago": sale.OneMonthAgo || 0,
         "Two Months Ago": sale.TwoMonthsAgo || 0,
         "Three Months Ago": sale.ThreeMonthsAgo || 0,
@@ -240,7 +240,7 @@ const Sales = () => {
         "Eleven Months Ago": sale.ElevenMonthsAgo || 0,
         "Twelve Months Ago": sale.TwelveMonthsAgo || 0,
         "Thirteen Months Ago": sale.ThirteenMonthsAgo || 0,
-        "Fourteen Months Ago": sale.FourteenMonthsAgo || 0,
+        "Fourteen Months Ago": sale.FourteenMonthsAgo || 0
     }));
 
     return (
@@ -264,35 +264,34 @@ const Sales = () => {
             )}
 
             {/* Render the bar chart */}
-            {sales.length > 0 && (
-                <div className="chart-container">
-                    <h2>Sales Over the Last 14 Months</h2>
-                    <ResponsiveContainer width="100%" height={400}>
-                        <BarChart data={chartData}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            {/* Add bars for each month */}
-                            <Bar dataKey="One Month Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Two Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Three Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Four Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Five Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Six Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Seven Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Eight Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Nine Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Ten Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Eleven Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Twelve Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Thirteen Months Ago" fill="#7DA1F5" />
-                            <Bar dataKey="Fourteen Months Ago" fill="#7DA1F5" />
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
-            )}
+                {sales.length > 0 && (
+                    <div className="chartcontainer">
+                        <h2>Sales Over the Last 14 Months</h2>
+                        <ResponsiveContainer width="100%" height={400}>
+                            <BarChart data={chartData} >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey = "month" label={{ value: 'Months', offset: -10 }}/>
+                                <YAxis />
+                                <Tooltip />
+                                {/* Add bars for each month with labels*/}
+                                <Bar dataKey="One Month Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Two Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Three Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Four Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Five Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Six Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Seven Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Eight Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Nine Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Ten Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Eleven Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Twelve Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Thirteen Months Ago" fill="#7DA1F5"/>
+                                <Bar dataKey="Fourteen Months Ago" fill="#7DA1F5"/>
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </div>
+                )}
 
             <div className="saleslist">
                 {sales.length === 0 ? (
