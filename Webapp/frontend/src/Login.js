@@ -35,10 +35,10 @@ const Login = () => {
           setError("Login failed, no token, try again.");
         }
       } else {
-        setError(err.message || "Login failed, please check your username and password.");
+        setError(error.message || "Login failed, please check your username and password.");
       }
-    } catch (err) {
-      setError(err.message || "An error occurred while logging in.");
+    } catch (error) {
+      setError(error.message || "An error occurred while logging in.");
     }
   };
 
