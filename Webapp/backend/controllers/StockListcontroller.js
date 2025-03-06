@@ -15,6 +15,7 @@ exports.addStock = async (req, res) => { // Add stock data
         });
 
         await newStock.save(); // Save it to the database
+        req.io.emit("stockUpdated");
         res.status(200).json(newStock);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -86,6 +87,7 @@ exports.updateStock = async (req, res) => { // Update stock by Id
         if (!updatedStock) {
             return res.status(404).json({ message: 'Stock not found' });
         }
+        req.io.emit("stockUpdated");
         res.status(200).json(updatedStock);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -103,6 +105,7 @@ exports.deleteStock = async (req, res) => { // Delete stock by Id and related sa
 
         await Sales.deleteMany({ StockId }); // Delete related sales data
 
+        req.io.emit("stockUpdated");
         res.status(200).json({ message: 'Stock and related sales deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });

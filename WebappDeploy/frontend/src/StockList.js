@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./StockList.css"; 
+import { io } from "socket.io-client";
+const socket = io("https://shop-deployment-test.onrender.com");
 
 const StockList = () => {
   const { shopId } = useParams(); // Get shopId from the URL
@@ -27,6 +29,11 @@ const StockList = () => {
     };
 
     fetchStocks();
+    socket.on("stockUpdated", fetchStocks);
+
+    return () => {
+      socket.off("stockUpdated");
+    };
   }, [shopId]);
 
   // Check if the user is logged in

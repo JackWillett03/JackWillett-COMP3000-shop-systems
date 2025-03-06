@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OwnerSales.css";
+import { io } from "socket.io-client";
+const socket = io("https://shop-deployment-test.onrender.com");
 
 const OwnerSales = () => {
     const [sales, setSales] = useState([]); // Store sales data
@@ -13,6 +15,11 @@ const OwnerSales = () => {
     // Get data when the page loads
     useEffect(() => {
         fetchData();
+        socket.on("salesUpdated", fetchData);
+
+        return () => {
+            socket.off("salesUpdated");
+        };
     }, []);
 
     // Get sales data

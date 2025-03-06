@@ -9,7 +9,14 @@ const Salesroute = require('./route/Salesroute');
 const Usersroute = require('./route/Usersroute');
 const Staffroute = require('./route/Staffroute');
 const app = express();
+const { Server } = require('socket.io');
 const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "*", // Allow requests from any frontend 
+        methods: ["GET", "POST", "PUT", "DELETE"]
+    }
+});
 
 
 dotenv.config(); // Load environment variables
@@ -23,7 +30,12 @@ mongoose
 
 app.use(express.json());
 
-app.use(cors())
+app.use(cors());
+
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 // Route handlers
 app.use('/shops', ShopListroute);
@@ -37,10 +49,14 @@ app.get('/', (req, res) => {
   res.json({ message: 'API is running successfully' });
 });
 
-// Catch-all route for undefined routes
-app.use((req, res, next) => {
-  res.status(404).json({ error: 'Route not found' });
-});
+io.on("connection", (socket) => {
+  console.log("A client connected:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("A client disconnected", socket.id);
+  })
+})
+
 
 // Start the server
 const PORT = process.env.PORT || 9000;
@@ -48,5 +64,5 @@ server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// Export app for testing purposes
-module.exports = app;
+// Export app and io
+module.exports = {app, io};

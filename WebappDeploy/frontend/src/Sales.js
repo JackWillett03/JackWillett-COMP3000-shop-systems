@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'; // Import BarChart from recharts
 import "./Sales.css";
+import { io } from "socket.io-client";
+const socket = io("https://shop-deployment-test.onrender.com");
 
 const Sales = () => {
     const [sales, setSales] = useState([]); // Stores sales data
@@ -46,6 +48,11 @@ const Sales = () => {
     // Get the data when the stockId changes
     useEffect(() => {
         fetchSalesData();
+        socket.on("salesUpdated", fetchSalesData);
+
+      return () => {
+        socket.off("salesUpdated");
+      };
     }, [stockId]);
 
     // Get sales data

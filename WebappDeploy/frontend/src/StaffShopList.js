@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./StaffShopList.css";
+import { io } from "socket.io-client";
+const socket = io("https://shop-deployment-test.onrender.com");
 
 const StaffShopList = () => {
   const [shops, setShops] = useState([]); // Stores the list of shops
@@ -29,6 +31,11 @@ const StaffShopList = () => {
     };
 
     fetchShops();
+    socket.on("shopUpdated", fetchShops);
+
+    return () => {
+      socket.off("shopUpdated");
+    };
   }, []);
 
   useEffect(() => { // Decode the JWT, set if they are a owner/manager/staff and their ShopId if they have one

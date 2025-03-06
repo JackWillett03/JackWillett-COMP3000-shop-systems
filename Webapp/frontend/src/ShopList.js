@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ShopList.css";
+import { io } from "socket.io-client";
+const socket = io("http://localhost:82");
 
 const ShopList = () => {
   const [shops, setShops] = useState([]); // Stores the list of shops from the database
@@ -26,6 +28,11 @@ const ShopList = () => {
     };
 
     fetchShops();
+    socket.on("shopUpdated", fetchShops);
+
+    return () => {
+      socket.off("shopUpdated");
+    };
   }, []); // Make sure it runs only once
 
   useEffect(() => { // Check if user is logged in

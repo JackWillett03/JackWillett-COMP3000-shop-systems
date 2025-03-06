@@ -13,6 +13,7 @@ exports.addShop = async (req, res) => { // Add shop
         });
 
         await newShop.save(); // Save it to the database
+        req.io.emit("shopUpdated");
         res.status(200).json(newShop);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -69,6 +70,7 @@ exports.updateShop = async (req, res) => { // Update by Id
         if (!updatedShop) {
             return res.status(404).json({ message: 'Shop not found' });
         }
+        req.io.emit("shopUpdated");
         res.status(200).json(updatedShop);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -90,6 +92,7 @@ exports.deleteShop = async (req, res) => { // Delete shop by Id
         await Staff.deleteMany({ ShopId: shopId });
         await Sales.deleteMany({ StockId: { $in: stockIds } });
 
+        req.io.emit("shopUpdated");
         res.status(200).json({ message: 'Shop and linked data deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });

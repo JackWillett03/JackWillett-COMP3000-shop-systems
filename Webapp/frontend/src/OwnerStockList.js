@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./StockList.css";
+import { io } from "socket.io-client";
+const socket = io("http://localhost:82");
 
 const StockList = () => {
   const [stocks, setStocks] = useState([]); // Store stocks
@@ -57,6 +59,11 @@ const StockList = () => {
     };
 
     fetchStocksAndShops();
+    socket.on("stockUpdated", fetchStocksAndShops);
+
+    return () => {
+      socket.off("stockUpdated");
+    };
   }, []);
 
   // Make sure the user is logged in and JWT valid

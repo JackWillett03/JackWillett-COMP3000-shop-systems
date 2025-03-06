@@ -44,6 +44,7 @@ exports.addSales = async (req, res) => { // Add sales data
         // Save the updated sales data
         await sales.save();
 
+        req.io.emit("salesUpdated");
         res.status(200).json(sales);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -116,6 +117,7 @@ exports.updateSales = async (req, res) => { // Update sales by Id
 
         await sales.save(); // Save the updated data
 
+        req.io.emit("salesUpdated");
         res.status(200).json(sales);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -129,6 +131,7 @@ exports.deleteSales = async (req, res) => { // Delete sales by Id
         if (!deletedSales) {
             return res.status(404).json({ message: 'Sales not found' });
         }
+        req.io.emit("salesUpdated");
         res.status(200).json({ message: 'Sales deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -183,6 +186,7 @@ exports.updatePlacement = async (req, res) => {
             }, { new: true });
         }
 
+        req.io.emit("salesUpdated");
         res.status(200).json({ message: 'Placement updated successfully', salesWithTotals });
 
     } catch (error) {
@@ -236,10 +240,8 @@ exports.updateSalesPrediction = async (req, res) => {
             PredictedNextMonthSales: predictedSales
         }, { new: true });
 
-        res.status(200).json({
-            message: 'Sales prediction updated successfully',
-            predictedSales: predictedSales
-        });
+        req.io.emit("salesUpdated");
+        res.status(200).json({message: 'Sales prediction updated successfully', predictedSales: predictedSales});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

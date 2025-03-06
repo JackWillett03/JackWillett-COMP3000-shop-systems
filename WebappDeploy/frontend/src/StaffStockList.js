@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./StaffStockList.css";
+import { io } from "socket.io-client";
+const socket = io("https://shop-deployment-test.onrender.com");
 
 const StaffStockList = () => {
   const { shopId } = useParams(); // Get the ShopId from the url
@@ -66,6 +68,11 @@ const StaffStockList = () => {
     };
 
     fetchStocks();
+    socket.on("stockUpdated", fetchStocks);
+
+    return () => {
+      socket.off("stockUpdated");
+    };
   }, [shopId]);
 
   // Handle search bar changes
