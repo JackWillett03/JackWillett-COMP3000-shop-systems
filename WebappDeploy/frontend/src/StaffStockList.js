@@ -95,6 +95,7 @@ const StaffStockList = () => {
 
   // Adding staff
   const handleStaff = () => {
+    localStorage.setItem("page", window.location.pathname); // Set this page to local storage
     navigate(`/staffmanagement/${shopId}`); // Go to Staff page
   };
 

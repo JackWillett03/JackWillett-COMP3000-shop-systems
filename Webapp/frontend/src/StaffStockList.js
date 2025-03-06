@@ -95,12 +95,13 @@ const StaffStockList = () => {
 
   // Adding staff
   const handleStaff = () => {
+    localStorage.setItem("page", window.location.pathname);
     navigate(`/staffmanagement/${shopId}`); // Go to Staff page
   };
 
   // Got to the sales page based on specific StockId
   const handleCardClick = (stockId) => {
-    localStorage.setItem("page", window.location.pathname); // Set this page to local storage to be used for sales
+    localStorage.setItem("page", window.location.pathname); // Set this page to local storage
     navigate(`/sales/${stockId}`); // Go to sales page
   };
 
