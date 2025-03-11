@@ -30,7 +30,7 @@ describe('/Tests to make sure it is running', () =>{
 
     it('test if the server is running on port 9000', (done) => {
         const port = process.env.PORT || 9000; 
-        chai.request(`http://localhost:${port}`)
+        chai.request(`http://https://shop-deployment-test.onrender.com:${port}`)
         .get('/')
         .end((err, res) => {
             if (err) {
