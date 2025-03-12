@@ -4,6 +4,9 @@ COMP3000 project. A stock management and analysis tool for shops with inbuilt cu
 ### Supervisor: 
 Fatma Bouabdallah 
 
+### Access via: 
+https://shop-deployment-test-front.onrender.com/
+
 ### Deployed site link: 
 https://shop-deployment-test-front.onrender.com
 
