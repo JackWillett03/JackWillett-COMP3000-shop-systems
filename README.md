@@ -4,11 +4,12 @@ COMP3000 project. A stock management and analysis tool for shops with inbuilt cu
 ### Supervisor: 
 Fatma Bouabdallah 
 
-### Access via: 
-https://shop-deployment-test-front.onrender.com/
-
 ### Deployed site link: 
 https://shop-deployment-test-front.onrender.com
+Owner account: Username – "Owner" , Password – "Helpme8-/" 
+
+### Youtube Video:
+https://youtu.be/PrDqjfbNtNs
 
 ### Trello backlog link: 
 https://trello.com/invite/b/670aa2637f28d2a4b832c90b/ATTIebff11846c176bbaf010041afc0afa162C2B8816/comp3000-backlog 
@@ -27,6 +28,11 @@ Technologies – Docker desktop, MERN stack, android studio.
 
 Test environment – Manual testing, Integration testing 
 
+### Project aims:
+The aim of this project is to create a system in which the customers of a certain shop/supermarket can view the current stock of a specific shop before they go there to shop so that they do not waste time and money to buy things that are not there. This would help the shops with their customer satisfaction rating as shoppers would no longer be disappointed after walking around the shop for an hour and not finding what they were looking for or ordering online and it being out of stock.
+
+High level staff members (e.g. managers) will also be able to access these databases and edit the content stored inside using a username and password to log in. They will be able to add, update and delete items, sales records along with shops. The database will automatically suggest placement for the items within the shop based off sales data (those items that sell more be placed further to the rear as it means customers will have to walk past other items that may catch their interest. This will all be linked to a website where the customers can access it meaning it is all one simple to use system and multiple do not have to be managed. Along with this there will be an app as well that they can download. The shops could integrate this into existing apps if they have them or use it as a base to start with. The database would also be easy to switch out as they would just have to link their database to the API instead of the one created in this project. 
+
 ### Similar projects
 
 ![image](https://github.com/user-attachments/assets/6dd71624-43d8-4ef1-a356-0b8ef031fcfa)
@@ -36,8 +42,6 @@ Test environment – Manual testing, Integration testing
 ![image](https://github.com/user-attachments/assets/b73ab500-6a67-4c0f-baf7-aef6d968320e)
 
 
-### Proposed Gantt chart:
-![image](https://github.com/user-attachments/assets/ff1b3582-6165-4bd6-b42a-20042dbd7a7f)
 
   
 
