@@ -22,16 +22,28 @@ Currently, from what I could discover supermarkets stock is currently tracked vi
 
 As well as all this, from what I discovered no supermarket inventory management system has extensive integration with customers. This is why I propose the adding of a website/app that allows both the customer to find both the supermarket of their choice via selection and to view the stock of that supermarket and the price so that they don’t waste time going to one that does not have their desired product in stock so that they can compare the prices allowing better competition (comparing the prices can be optional for the supermarket depending on if it wants it). For the AI models I would most likely use a linear regression or random forest model, the linear regression would be more practical, but the random forest is more versatile so useful if unable to get the LR to work, this will take more research and testing when the time comes. 
 
-Programming languages – NoSQL - databases, Java/Xml - App, HTML/CSS/JS - Website/API 
-
-Technologies – Docker desktop, MERN stack, android studio. 
-
-Test environment – Manual testing, Integration testing 
-
 ### Project aims:
 The aim of this project is to create a system in which the customers of a certain shop/supermarket can view the current stock of a specific shop before they go there to shop so that they do not waste time and money to buy things that are not there. This would help the shops with their customer satisfaction rating as shoppers would no longer be disappointed after walking around the shop for an hour and not finding what they were looking for or ordering online and it being out of stock.
 
 High level staff members (e.g. managers) will also be able to access these databases and edit the content stored inside using a username and password to log in. They will be able to add, update and delete items, sales records along with shops. The database will automatically suggest placement for the items within the shop based off sales data (those items that sell more be placed further to the rear as it means customers will have to walk past other items that may catch their interest. This will all be linked to a website where the customers can access it meaning it is all one simple to use system and multiple do not have to be managed. Along with this there will be an app as well that they can download. The shops could integrate this into existing apps if they have them or use it as a base to start with. The database would also be easy to switch out as they would just have to link their database to the API instead of the one created in this project. 
+
+### Technologies:
+- Docker Desktop
+- Visual Studio Code
+- MongoDB Atlas
+- Render
+- Android Studio
+- React
+- Recharts
+- Express
+- Mongoose
+- Bcrypt
+- JsonWebToken
+- Cors
+- Dotenv
+- WebSockets
+- Mocha
+- Chai
 
 ### Similar projects
 
