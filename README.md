@@ -1,5 +1,5 @@
 # JackWillett-COMP3000-Shop-systems
-COMP3000 project. A stock management and analysis tool for shops with inbuilt customer viewing access, website and app
+COMP3000 project. A stock management and analysis tool for shops with inbuilt customer viewing access via website.
 
 ### Supervisor: 
 Fatma Bouabdallah 
