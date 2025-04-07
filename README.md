@@ -49,9 +49,14 @@ High level staff members (e.g. managers) will also be able to access these datab
 
 ![image](https://github.com/user-attachments/assets/6dd71624-43d8-4ef1-a356-0b8ef031fcfa)
 
-### Risk Plan:
+### Conclusions
+In conclusion, this project successfully achieved the majority of its main goals while also including additional features beyond the original planned ones. A full stack web application was developed to efficiently track shop sales, data, staff and other details. The implementation of Websockets enabled real time updates, ensuring that changes to stock and sales and the shops that are on show were immediately reflected across the entire system for anyone viewing it. Additionally, Render was used for deployment, providing a simple and scalable hosting solution that allows for easy maintenance in future updates. 
 
-![image](https://github.com/user-attachments/assets/b73ab500-6a67-4c0f-baf7-aef6d968320e)
+Despite these accomplishments, some challenges arose during development, particularly during time management, balancing this project alongside other coursework limited the time available to develop certain features, most notably the mobile app, which ended up being scrapped. However, this also led to the prioritisation of core functionality and as a result, some additional smaller features are integrated to make it better for users. I faced technical challenges and issues with websockets, due to limited resources and nonfunctioning code where it had been taught prior, though through my own research, I finally found a working solution. 
+
+Looking to the future, there are multiple areas where this project could be expanded and improved. One improvement would be the development of the mobile application that was originally planned, which would make it easier for customers to use in a short amount of time. On the customer side, new features such as the ability to place orders directly through the site or the app could be introduced offering a way to shop from home and for the staff, the stock updating system could be further refined by implementing barcode scanning for inventory management, reducing the amount of manual input that needs to be done. Additionally, a more advanced machine learning model could be used for the sales prediction to make it more accurate as linear regression is rather flawed. 
+
+Overall, this project met its primary goals and demonstrated web development technologies in building a scalable, interactive and user-friendly application, while some features remain for future development due to time limitation, the system has been designed in a way that allows for future expansion in an easy way. 
 
 
 
