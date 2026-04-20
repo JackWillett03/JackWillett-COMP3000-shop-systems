@@ -6,7 +6,6 @@ Fatma Bouabdallah
 
 ### Deployed site link: 
 https://shop-deployment-test-front.onrender.com
-Owner account: Username – "Owner" , Password – "Helpme8-/" 
 
 ### Youtube Video:
 https://youtu.be/PrDqjfbNtNs
